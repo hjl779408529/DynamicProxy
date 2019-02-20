@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using Abp.Domain.Uow;
 using Autofac;
 using Autofac.Extras.DynamicProxy;
@@ -118,13 +119,17 @@ namespace DynamicProxy
             //cat.Run();
 
             //动态代理高级用法  为代理类添加接口
-            var builder = new ContainerBuilder();
-            builder.RegisterType<CatInterceptor>();//注册拦截器
-            builder.RegisterType<Cat>().As<ICat>();//注册Cat
-            builder.RegisterType<CatOwner>().InterceptedBy(typeof(CatInterceptor)).EnableClassInterceptors(ProxyGenerationOptions.Default, additionalInterfaces: typeof(ICat));//注册CatOwner并为其添加拦截器和接口
-            var container = builder.Build();
-            var cat = container.Resolve<CatOwner>();//获取CatOwner代理类
-            cat.GetType().GetMethod("Eat").Invoke(cat, null);//因为为代理类添加了ICat接口，所以通过反射获取代理类方法执行
+            //var builder = new ContainerBuilder();
+            //builder.RegisterType<CatInterceptor>();//注册拦截器
+            //builder.RegisterType<Cat>().As<ICat>();//注册Cat
+            //builder.RegisterType<CatOwner>().InterceptedBy(typeof(CatInterceptor)).EnableClassInterceptors(ProxyGenerationOptions.Default, additionalInterfaces: typeof(ICat));//注册CatOwner并为其添加拦截器和接口
+            //var container = builder.Build();
+            //var cat = container.Resolve<CatOwner>();//获取CatOwner代理类
+            //cat.GetType().GetMethod("Eat").Invoke(cat, null);//因为为代理类添加了ICat接口，所以通过反射获取代理类方法执行
+
+            Thread td1 = new Thread(() => Console.WriteLine("哈哈哒！"));
+            td1.Start();
+
 
             Console.Read();
         }

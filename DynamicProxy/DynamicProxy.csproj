@@ -12,4 +12,8 @@
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="4.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="参考文件\" />
+  </ItemGroup>
+
 </Project>
